@@ -1,0 +1,6 @@
+.app {
+  min-height: 100vh; /* same as min-h-screen */
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+}
