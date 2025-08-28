@@ -47,7 +47,7 @@ const Hero = () => {
           <div className={styles.gradientOrb}></div>
           <div className={styles.productShowcase}>
             <img
-              src={heroImage}
+              src={`https://res.cloudinary.com/du3yydyzz/image/upload/hero_banner_tsqls5.png`}
               alt="Premium Product"
               className={styles.productImage}
             />

@@ -16,10 +16,16 @@ import CartPage from "./pages/cart/cart";
 import { fetchUser } from "./redux/authThunk";
 import CheckoutPage from "./pages/checkout/checkout";
 import PaymentPage from "./pages/payment/payment";
+import ScrollToTop from "./utils/scrollToTop";
+import OrderConfirmation from "./pages/order-confirmation/orderConfirmation";
+import Orders from "./pages/orders/orders";
+import Profile from "./pages/profile/profile";
 export default function App() {
   return (
     <div className={styles.app}>
       <Header />
+
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
@@ -27,6 +33,9 @@ export default function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/myorders" element={<Orders />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <Footer />

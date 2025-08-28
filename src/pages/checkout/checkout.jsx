@@ -7,8 +7,10 @@ import {
 } from "../../redux/cartSlice";
 import { useSelector } from "react-redux";
 import handleCheckout from "../../service/payment";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
+  const navigate = useNavigate();
   const items = useSelector(getCartItems);
   const getTotalPrice = useSelector(getTotalAmount);
   const [formData, setFormData] = useState({
@@ -19,6 +21,7 @@ export default function CheckoutPage() {
     city: "",
     state: "",
     zipCode: "",
+    phoneNumber: "",
     country: "United States",
   });
 
@@ -34,11 +37,14 @@ export default function CheckoutPage() {
     sessionStorage.setItem("checkoutData", JSON.stringify(formData));
 
     // Redirect to payment page
-    handleCheckout({
-      shippingInfo: {
-        formData,
+    handleCheckout(
+      {
+        shippingInfo: {
+          ...formData,
+        },
       },
-    });
+      navigate
+    );
     // window.location.href = "/payment";
   };
 
@@ -92,16 +98,28 @@ export default function CheckoutPage() {
           <form onSubmit={handleSubmit} className={styles.checkoutForm}>
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Contact Information</h3>
+
               <div className={styles.formGroup}>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={styles.input}
-                  required
-                />
+                <div className={styles.contactInfo}>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={styles.input}
+                    required
+                  />
+                  <input
+                    type="tel"
+                    name="phoneNumber"
+                    placeholder="Phone number"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    className={styles.input}
+                    required
+                  />
+                </div>
               </div>
             </div>
 

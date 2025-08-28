@@ -127,6 +127,11 @@
   color: #ffffff;
   margin-bottom: 20px;
 }
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 .formGroup {
   margin-bottom: 16px;
