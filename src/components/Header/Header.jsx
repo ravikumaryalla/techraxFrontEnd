@@ -5,10 +5,13 @@ import { getTotalQuantity } from "../../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../redux/authSlice";
 import { logoutThunk } from "../../redux/authThunk";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const Header = () => {
   const cartCount = useSelector(getTotalQuantity);
   const dispatch = useDispatch();
+  const ref = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -16,6 +19,20 @@ const Header = () => {
   const user = useSelector(getUser);
   console.log(user, "user in header");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -95,7 +112,7 @@ const Header = () => {
         </div>
 
         {user ? (
-          <div className={styles.profileSection}>
+          <div className={styles.profileSection} ref={ref}>
             <button
               className={styles.profileButton}
               onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -119,7 +136,10 @@ const Header = () => {
             </button>
             {showProfileMenu && (
               <div className={styles.profileDropdown}>
-                <a href="/orders" className={styles.dropdownItem}>
+                <a
+                  className={styles.dropdownItem}
+                  onClick={() => navigate("/myorders")}
+                >
                   <svg
                     width="16"
                     height="16"
@@ -133,7 +153,10 @@ const Header = () => {
                   </svg>
                   My Orders
                 </a>
-                <a href="#" className={styles.dropdownItem}>
+                <a
+                  className={styles.dropdownItem}
+                  onClick={() => navigate("/profile")}
+                >
                   <svg
                     width="16"
                     height="16"
