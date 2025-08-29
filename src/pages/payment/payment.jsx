@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./payment.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function PaymentPage() {
   const { items, getTotalPrice, clearCart } = {
@@ -173,7 +174,7 @@ export default function PaymentPage() {
                   Processing...
                 </>
               ) : (
-                `Complete Order - $${total.toLocaleString()}`
+                `Complete Order - ₹${total.toLocaleString()}`
               )}
             </button>
           </form>
@@ -198,7 +199,7 @@ export default function PaymentPage() {
                       </p>
                     </div>
                     <div className={styles.itemPrice}>
-                      ${(item.price * item.quantity).toLocaleString()}
+                      ₹{(item.price * item.quantity).toLocaleString()}
                     </div>
                   </div>
                 ))}
@@ -208,7 +209,7 @@ export default function PaymentPage() {
 
               <div className={styles.summaryRow}>
                 <span>Subtotal</span>
-                <span>${subtotal.toLocaleString()}</span>
+                <span>₹{subtotal.toLocaleString()}</span>
               </div>
 
               <div className={styles.summaryRow}>
@@ -218,14 +219,14 @@ export default function PaymentPage() {
 
               <div className={styles.summaryRow}>
                 <span>Tax</span>
-                <span>${tax.toLocaleString()}</span>
+                <span>₹{tax.toLocaleString()}</span>
               </div>
 
               <div className={styles.summaryDivider}></div>
 
               <div className={styles.summaryTotal}>
                 <span>Total</span>
-                <span>${total.toLocaleString()}</span>
+                <span>₹{total.toLocaleString()}</span>
               </div>
             </div>
           </div>

@@ -4,45 +4,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartThunk";
 import { useEffect } from "react";
 import apiClient from "../../service/apiClient";
-// const products = [
-//   {
-//     id: 1,
-//     name: "Platinum Elite Watch",
-//     price: 2499,
-//     originalPrice: 2999,
-//     image: "/placeholder-nufsh.png",
-//     badge: "Limited Edition",
-//     rating: 4.9,
-//   },
-//   {
-//     id: 2,
-//     name: "Diamond Essence Ring",
-//     price: 1899,
-//     originalPrice: null,
-//     image: "/diamond-engagement-ring.png",
-//     badge: "New Arrival",
-//     rating: 5.0,
-//   },
-//   {
-//     id: 3,
-//     name: "Leather Masterpiece Bag",
-//     price: 899,
-//     originalPrice: 1199,
-//     image: "/placeholder-9t98s.png",
-//     badge: "Best Seller",
-//     rating: 4.8,
-//   },
-//   {
-//     id: 4,
-//     name: "Sapphire Elegance Necklace",
-//     price: 3299,
-//     originalPrice: null,
-//     image: "/sapphire-necklace.png",
-//     badge: "Exclusive",
-//     rating: 4.9,
-//   },
-// ];
-
 export default function FeaturedProducts() {
   const [favorites, setFavorites] = useState([]);
   const [products, setProducts] = useState([]);
@@ -132,11 +93,11 @@ export default function FeaturedProducts() {
 
                 <div className={styles.priceContainer}>
                   <span className={styles.price}>
-                    ${product.price.toLocaleString()}
+                    ₹{product.price.toLocaleString()}
                   </span>
                   {product.originalPrice && (
                     <span className={styles.originalPrice}>
-                      ${product.originalPrice.toLocaleString()}
+                      ₹{product.originalPrice.toLocaleString()}
                     </span>
                   )}
                 </div>

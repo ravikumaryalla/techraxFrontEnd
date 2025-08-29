@@ -24,7 +24,6 @@ export const SignIn = () => {
       navigate("/");
     }
 
-    console.log("Sign in response:", response);
     setIsLoading(false);
   };
 

@@ -3,7 +3,6 @@ import { login, logout, register, getUser } from "../service/authService";
 
 export const fetchUser = createAsyncThunk("auth/fetchUser", async () => {
   const user = await getUser();
-  console.log(user, "user in async thunk");
   return user;
 });
 

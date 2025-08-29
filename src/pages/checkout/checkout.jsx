@@ -200,7 +200,6 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <div key={item.id} className={styles.orderItem}>
                     <div className={styles.itemImage}>
-                      {console.log(item, "item")}
                       <img
                         src={
                           item?.product?.images?.[0]?.url || "/placeholder.svg"

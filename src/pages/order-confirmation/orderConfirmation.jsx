@@ -8,7 +8,6 @@ import { format } from "date-fns/format";
 
 export default function OrderConfirmation() {
   const { state } = useLocation();
-  console.log(state, "state");
   const estimatedDelivery = format(
     addDays(state?.paidAt, 8),
     "EEEE, dd MMM yyyy"

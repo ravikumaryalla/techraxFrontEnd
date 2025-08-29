@@ -68,8 +68,6 @@ const cartSlice = createSlice({
 
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action, "action from cart");
-        console.log(state.items, "state items");
         state.items.push(action.payload.cart);
         state.totalQuantity = action.payload.totalQuantity;
         state.totalPrice = action.payload.totalPrice;
@@ -81,7 +79,6 @@ const cartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(deleteProductFromCart.fulfilled, (state, action) => {
-        console.log(action, "action freom cart");
         state.status = "succeeded";
         state.items = state.items.filter(
           (item) => item._id !== action.payload.id

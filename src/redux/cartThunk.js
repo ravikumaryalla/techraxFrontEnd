@@ -12,8 +12,9 @@ const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
 });
 
 const addToCart = createAsyncThunk("cart/addToCart", async (payload) => {
-  const { userId, productId, quantity } = payload;
-  const cart = await addProductToCart({ userId, productId, quantity });
+  const { productId, quantity } = payload;
+
+  const cart = await addProductToCart({ productId, quantity });
   return cart;
 });
 
@@ -28,7 +29,6 @@ const deleteProductFromCart = createAsyncThunk(
 const changeQuantity = createAsyncThunk(
   "cart/changeQuantity",
   async (payload) => {
-    console.log(payload, "payload");
     const { id, quantity } = payload;
 
     const cart = await updateQuantity(id, quantity);

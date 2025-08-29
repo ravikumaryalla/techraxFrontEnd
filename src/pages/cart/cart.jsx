@@ -29,8 +29,6 @@ export default function CartPage() {
   };
   const items = useSelector(getCartItems);
   const totalAmount = useSelector(getTotalAmount);
-  console.log(totalAmount, "totalAmount");
-  console.log(items, "cart");
   if (items.length === 0) {
     return (
       <main className={styles.main}>
@@ -75,7 +73,6 @@ export default function CartPage() {
 
         <div className={styles.cartContent}>
           <div className={styles.cartItems}>
-            {console.log(items, "item raja")}
             {items.map((item) => (
               <div key={item._id} className={styles.cartItem}>
                 <div className={styles.itemImage}>
@@ -87,7 +84,7 @@ export default function CartPage() {
 
                 <div className={styles.itemDetails}>
                   <h3 className={styles.itemName}>{item.product.name}</h3>
-                  <p className={styles.itemPrice}>${item?.product?.price}</p>
+                  <p className={styles.itemPrice}>₹{item?.product?.price}</p>
                 </div>
 
                 <div className={styles.quantityControls}>
@@ -147,7 +144,7 @@ export default function CartPage() {
 
               <div className={styles.summaryRow}>
                 <span>Tax</span>
-                <span>${Math.round(totalAmount * 0.08)}</span>
+                <span>₹{Math.round(totalAmount * 0.08)}</span>
               </div>
 
               <div className={styles.summaryDivider}></div>

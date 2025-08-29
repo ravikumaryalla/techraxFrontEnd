@@ -2,13 +2,14 @@ import { useState } from "react";
 import styles from "./Header.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getTotalQuantity } from "../../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getUser } from "../../redux/authSlice";
 import { logoutThunk } from "../../redux/authThunk";
 import { useEffect } from "react";
 import { useRef } from "react";
 
 const Header = () => {
+  const location = useLocation();
   const cartCount = useSelector(getTotalQuantity);
   const dispatch = useDispatch();
   const ref = useRef();
@@ -17,7 +18,6 @@ const Header = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const user = useSelector(getUser);
-  console.log(user, "user in header");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,8 +42,13 @@ const Header = () => {
         </div>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
-          <a href="#" className={styles.navLink}>
-            Collections
+          <a
+            className={`${styles.navLink} ${
+              location.pathname === "/allproducts" ? styles.activePage : ""
+            }`}
+            onClick={() => navigate("/allproducts")}
+          >
+            All Products
           </a>
           <a href="#" className={styles.navLink}>
             Premium
