@@ -36,7 +36,7 @@ export default function Categories() {
   const navigate = useNavigate();
 
   return (
-    <section className={styles.categories}>
+    <section className={styles.categories} id="categories">
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Curated Collections</h2>

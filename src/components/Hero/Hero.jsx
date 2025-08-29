@@ -1,17 +1,9 @@
 import styles from "./Hero.module.css";
-import heroImage from "../../assets/hero_banner.png";
-import { getcart } from "../../service/cartService";
-import { useEffect } from "react";
 const Hero = () => {
-  // useEffect(() => {
-  //   const fetchCart = async () => {
-  //     const res = await getcart();
-  //     console.log(res);
-  //     return res;
-  //   };
-  //   fetchCart();
-  // }, []);
-
+  const handleScroll = () => {
+    const section = document.getElementById("categories");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
@@ -27,19 +19,8 @@ const Hero = () => {
             Curated exclusively for those who demand excellence.
           </p>
           <div className={styles.actions}>
-            <button className={styles.primaryButton}>Explore Collection</button>
-            <button className={styles.secondaryButton}>
-              Watch Story
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <polygon points="5,3 19,12 5,21" />
-              </svg>
+            <button className={styles.primaryButton} onClick={handleScroll}>
+              Explore Collection
             </button>
           </div>
         </div>

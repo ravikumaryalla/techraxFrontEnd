@@ -368,8 +368,14 @@ export default function Productspage() {
                     alt={product.name}
                     className={styles.productImage}
                   />
-                  {product?.badge && (
-                    <div className={styles.badge}>{product.badge}</div>
+                  {product?.badges && product.badges.length > 0 && (
+                    <div className={styles.badge}>
+                      {
+                        product.badges[
+                          Math.floor(Math.random() * product.badges.length)
+                        ]
+                      }
+                    </div>
                   )}
                   <button
                     className={`${styles.favoriteButton} ${

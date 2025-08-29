@@ -11,7 +11,7 @@ export default function FeaturedProducts() {
 
   useEffect(() => {
     apiClient
-      .get("/products")
+      .get("/products?badges=Featured")
       .then((response) => {
         console.log(response, "response");
         setProducts(response.data.products);
@@ -48,15 +48,14 @@ export default function FeaturedProducts() {
                   alt={product.name}
                   className={styles.productImage}
                 />
-                <div className={styles.badge}>{
-                  //product.badge
-                  `Limited Edition`
-                }</div>
+                {product?.badges.length > 1 && (
+                  <div className={styles.badge}>{product.badges[1]}</div>
+                )}
                 <button
                   className={`${styles.favoriteButton} ${
-                    favorites.includes(product.id) ? styles.favoriteActive : ""
+                    favorites.includes(product._id) ? styles.favoriteActive : ""
                   }`}
-                  onClick={() => toggleFavorite(product.id)}
+                  onClick={() => toggleFavorite(product._id)}
                 >
                   <svg
                     width="20"

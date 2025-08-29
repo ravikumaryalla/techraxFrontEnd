@@ -43,6 +43,14 @@ const Header = () => {
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
           <a
+            className={`${styles.navLink}  ${
+              location.pathname === "/" ? styles.activePage : ""
+            }`}
+            onClick={() => navigate("/")}
+          >
+            Home
+          </a>
+          <a
             className={`${styles.navLink} ${
               location.pathname === "/allproducts" ? styles.activePage : ""
             }`}
@@ -50,9 +58,7 @@ const Header = () => {
           >
             All Products
           </a>
-          <a href="#" className={styles.navLink}>
-            Premium
-          </a>
+
           <a href="#" className={styles.navLink}>
             Exclusive
           </a>
@@ -140,7 +146,10 @@ const Header = () => {
               >{`${user.firstName} ${user.lastName}`}</span>
             </button>
             {showProfileMenu && (
-              <div className={styles.profileDropdown}>
+              <div
+                className={styles.profileDropdown}
+                onClick={() => setShowProfileMenu(false)}
+              >
                 <a
                   className={styles.dropdownItem}
                   onClick={() => navigate("/myorders")}
