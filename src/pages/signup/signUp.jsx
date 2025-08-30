@@ -5,7 +5,8 @@ import { fetchUser, registerThunk } from "../../redux/authThunk";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCart } from "../../redux/cartThunk";
-
+import { useGoogleLogin } from "@react-oauth/google";
+import apiClient from "../../service/apiClient";
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +22,24 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   // const [acceptTerms, setAcceptTerms] = useState(false);
 
+  const handleGoogleSignUp = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (tokenResponse) => {
+      console.log("tokenResponse", tokenResponse);
+      let response = await apiClient.post("/google-signup", {
+        code: tokenResponse?.code,
+      });
+      console.log("response in frontend auth", response);
+      if (response?.data?.success) {
+        dispatch(fetchUser());
+        dispatch(fetchCart());
+        navigate("/");
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   const handleChange = (e) => {
     setErrors({});
     setFormData((prev) => ({
@@ -91,11 +110,6 @@ const SignUp = () => {
       setIsLoading(false);
       console.log("[v0] Sign up attempted with:", formData);
     }, 1000);
-  };
-
-  const handleGoogleSignUp = () => {
-    console.log("[v0] Google sign up clicked");
-    // Google OAuth integration would go here
   };
 
   return (
