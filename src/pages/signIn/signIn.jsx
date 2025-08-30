@@ -4,6 +4,8 @@ import { loginThunk, fetchUser } from "../../redux/authThunk";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCart } from "../../redux/cartThunk";
+import { useGoogleLogin } from "@react-oauth/google";
+import apiClient from "../../service/apiClient";
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -27,10 +29,24 @@ export const SignIn = () => {
     setIsLoading(false);
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("[v0] Google sign in clicked");
-    // Google OAuth integration would go here
-  };
+  const handleGoogleSignIn = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (tokenResponse) => {
+      console.log("tokenResponse", tokenResponse);
+      let response = await apiClient.post("/google-login", {
+        code: tokenResponse?.code,
+      });
+      console.log("response in frontend auth", response);
+      if (response?.data?.success) {
+        dispatch(fetchUser());
+        dispatch(fetchCart());
+        navigate("/");
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   return (
     <div className={styles.container}>

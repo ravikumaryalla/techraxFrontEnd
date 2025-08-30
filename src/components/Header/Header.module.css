@@ -86,7 +86,7 @@
   right: -42px;
   caret-color: #6366f1;
   border: 2px solid #ccc; /* 👈 default border */
-  border-radius: 18px;
+  border-radius: 22px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   color: var(--foreground);

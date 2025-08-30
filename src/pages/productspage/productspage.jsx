@@ -216,6 +216,7 @@ export default function Productspage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   const [favorites, setFavorites] = useState([]);
   const [sortBy, setSortBy] = useState("featured");
@@ -227,8 +228,10 @@ export default function Productspage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const response = await getProductsByCategory(state?.category);
         setProducts(response);
+        setLoading(true);
       } catch (error) {
         console.error("Error fetching products:", error);
       }

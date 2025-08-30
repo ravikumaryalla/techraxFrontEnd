@@ -154,9 +154,11 @@ export default function CartPage() {
                 <span>₹{totalAmount + Math.round(totalAmount * 0.08)}</span>
               </div>
 
-              <a href="/checkout" className={styles.checkoutButton}>
-                Proceed to Checkout
-              </a>
+              <div className={styles.checkoutWrapper}>
+                <a href="/checkout" className={styles.checkoutButton}>
+                  Proceed to Checkout
+                </a>
+              </div>
             </div>
           </div>
         </div>
